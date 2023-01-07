@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .img {
+        max-width: 200px;
+        max-height: 200px;
+      }
+    </style>
+    <title>Home</title>
+</head>
+<body class="d-flex justify-content-center">
+  <div class="row">
+    <div class="col-sm-12 col-md-6">
+      <form action="/upload-image" method="POST" enctype="multipart/form-data" class="mx-auto w-100">
+        <div class="form-group">
+          <!-- Agrega un campo oculto con el ID del usuario -->
+          <input type="hidden" name="userId" id="userId" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="file" name="image" class="form-control-file">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Subir imagen</button>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-12 col-md-6 mt-5 mt-sm-0">
+      <h2>Imágenes</h2>
+      <div id="image-container" class="d-flex flex-wrap mt-3"></div>
+    </div>
+  </div>
+  
+  <script>
+    localStorage.setItem("userId", 12345)
+    // Obtiene el ID del usuario del localStorage y lo asigna al campo oculto del formulario
+    const userId = localStorage.getItem('userId');
+    document.querySelector('#userId').value = userId;
+    
+    // Hace una petición HTTP GET a la ruta '/api/images' para obtener la lista de enlaces a imágenes
+    fetch(`http://localhost:3000/image-links/${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        // Crea una etiqueta 'img' por cada enlace en la lista y la añade al contenedor de imágenes
+        data.imageLinks.forEach(link => {
+          const imgElement = document.createElement('img');
+          imgElement.src = link;
+          imgElement.classList.add('mb-3', 'mr-3', 'w-100', 'img');
+          document.querySelector('#image-container').appendChild(imgElement);
+        });
+      });
+  </script>
+</body>
+
+
+
+
+  
+  
+</html>

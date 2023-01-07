@@ -1,0 +1,30 @@
+{
+  "name": "imagesusers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "imagesusers"
+  },
+  "keywords": [
+    "images",
+    "por",
+    "usuario"
+  ],
+  "author": "gregorio",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.4"
+  }
+}
